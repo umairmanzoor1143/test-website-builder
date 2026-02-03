@@ -59,21 +59,41 @@ export default function OpeningHoursSection({ openingHours, colors }: OpeningHou
 
   return (
     <section
-      className="py-40 text-center flex flex-col items-center justify-center relative z-10"
+      className="py-20 px-6 md:px-20 relative z-10"
       style={{ backgroundColor: colors.backgroundColor }}
     >
-      <h2
-        className="display text-3xl md:text-5xl mb-8"
-        style={{ color: textColor }}
-      >
-        Öffnungszeiten
-      </h2>
+      <div className="max-w-[1800px] mx-auto">
+        {/* Header */}
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-10">
+          <div>
+            <div
+              className="text-xs uppercase tracking-widest mb-4 opacity-50"
+              style={{ color: textColor }}
+            >
+              Geschäftszeiten
+            </div>
+            <h2
+              className="display text-4xl md:text-6xl uppercase leading-none"
+              style={{ color: textColor }}
+            >
+              Öffnungs
+              <br />
+              <span style={{ color: colors.accentColor }}>zeiten.</span>
+            </h2>
+          </div>
+          <p
+            className="max-w-md font-light leading-relaxed"
+            style={{ color: getTextColorWithOpacity(colors) }}
+          >
+            Besuchen Sie uns zu den folgenden Zeiten.
+          </p>
+        </div>
 
       <div
-        className="max-w-xl font-light mb-12 leading-relaxed"
+        className="mx-auto flex items-center justify-center flex-col font-light mb-12 leading-relaxed"
         style={{ color: getTextColorWithOpacity(colors, "99") }}
       >
-        <div className="grid grid-cols-2 gap-x-12 gap-y-2 text-left text-lg max-w-sm mx-auto">
+        <div className="grid grid-cols-2 gap-x-12 gap-y-2 text-left text-lg max-w-sm">
           {displayedHours.map((group, index) => (
             <div key={index} className="contents">
               <div className="font-semibold" style={{ color: textColor }}>
@@ -108,8 +128,7 @@ export default function OpeningHoursSection({ openingHours, colors }: OpeningHou
           <p className="mt-8 text-sm opacity-60">{openingHours.message}</p>
         )}
       </div>
-
-
+      </div>
     </section>
   );
 }

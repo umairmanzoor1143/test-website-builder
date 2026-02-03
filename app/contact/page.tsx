@@ -64,5 +64,5 @@ export default async function ContactPage() {
     return <Template2Contact companyId={companyId} data={data} />;
   }
 
-  return <Template1Contact companyId={companyId} data={data} />;
+  return <Template2Contact companyId={companyId} data={data} />;
 }

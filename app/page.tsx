@@ -65,6 +65,6 @@ export default async function Home() {
   }
 
   // Default to Template 1
-  return <Template1 companyId={companyId} data={data} />;
+  return <Template2 companyId={companyId} data={data} />;
 }
 

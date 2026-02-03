@@ -14,9 +14,6 @@ import {
 import { cache } from "react";
 import {BASE_URL, DOMAIN_API_URL} from "@/config/index";
 
-// const BASE_URL = "http://localhost:5000/website-business-public/companies";
-// const DOMAIN_API_URL = "http://localhost:5000/website-business-public/domain";
-
 // Cache duration for Next.js fetch cache (ISR-like behavior)
 const REVALIDATE_TIME = 300; // 5 minutes
 
@@ -108,6 +105,16 @@ export async function getCompanySettings(companyId: string): Promise<CompanySett
 // AGGREGATED DATA FUNCTION
 // ============================================
 
+// Helper to safely call an API and return fallback on error
+async function safeApiCall<T>(apiCall: Promise<T>, fallback: T, name: string): Promise<T> {
+  try {
+    return await apiCall;
+  } catch (error) {
+    console.warn(`API call ${name} failed, using fallback:`, error);
+    return fallback;
+  }
+}
+
 // React cache() deduplicates calls within the same request
 // Next.js fetch cache handles caching across requests (no 2MB limit)
 export const getAllLandingPageData = cache(
@@ -123,15 +130,15 @@ export const getAllLandingPageData = cache(
       employees,
       settings,
     ] = await Promise.all([
-      getCompany(companyId),
-      getContactInfo(companyId),
-      getAbout(companyId),
-      getPosts(companyId),
-      getOpeningHours(companyId),
-      getEvents(companyId),
-      getTeams(companyId),
-      getEmployees(companyId),
-      getCompanySettings(companyId),
+      safeApiCall(getCompany(companyId), {} as Company, 'getCompany'),
+      safeApiCall(getContactInfo(companyId), {} as ContactInfo, 'getContactInfo'),
+      safeApiCall(getAbout(companyId), {} as About, 'getAbout'),
+      safeApiCall(getPosts(companyId), [] as Post[], 'getPosts'),
+      safeApiCall(getOpeningHours(companyId), {} as OpeningHours, 'getOpeningHours'),
+      safeApiCall(getEvents(companyId), [] as Event[], 'getEvents'),
+      safeApiCall(getTeams(companyId), [] as Team[], 'getTeams'),
+      safeApiCall(getEmployees(companyId), [] as Employee[], 'getEmployees'),
+      safeApiCall(getCompanySettings(companyId), {} as CompanySettings, 'getCompanySettings'),
     ]);
 
     return {
@@ -147,6 +154,7 @@ export const getAllLandingPageData = cache(
     };
   }
 );
+
 
 // Alias for metadata
 export const getCachedCompany = cache(getCompany);

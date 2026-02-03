@@ -11,13 +11,6 @@ const HeroAnimations = dynamic(() => import("./HeroAnimations"), {
   ssr: false,
 });
 
-const SplitTextAnimations = dynamic(() => import("./SplitTextAnimations"), {
-  ssr: false,
-});
-
-const CardStackAnimations = dynamic(() => import("./CardStackAnimations"), {
-  ssr: false,
-});
 
 const FooterParallax = dynamic(() => import("./FooterParallax"), {
   ssr: false,
@@ -29,8 +22,6 @@ export default function AnimationWrapper() {
     <>
       <LenisProvider />
       <HeroAnimations />
-      <SplitTextAnimations />
-      <CardStackAnimations />
       <FooterParallax />
     </>
   );

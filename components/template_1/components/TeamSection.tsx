@@ -1,3 +1,4 @@
+"use client";
 import { Team, Employee, ThemeColors } from "@/app/types";
 import Image from "next/image";
 import { getContrastColor } from "../utils/theme";
@@ -73,6 +74,7 @@ export default function TeamSection({ teams, employees, colors }: TeamSectionPro
             <div
               key={member.id}
               className="group w-full sm:w-[calc(50%-1rem)] md:w-[calc(33.333%-1.5rem)] lg:w-[calc(25%-1.5rem)] max-w-[280px]"
+                onClick={()=> window.open( `https://id.me-business.ch/card/${member?.id}`, "_blank")}
             >
               {/* Image */}
               <div 

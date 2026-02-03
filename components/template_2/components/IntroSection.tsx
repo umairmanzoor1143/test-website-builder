@@ -12,36 +12,57 @@ export default function IntroSection({ about, colors, contactInfo }: IntroSectio
 
   return (
     <section
-      className="py-32 px-6 md:px-20 grid md:grid-cols-2 gap-16 max-w-[1800px] mx-auto intro-section"
+      className="py-20 px-6 md:px-20 max-w-[1800px] mx-auto intro-section"
       style={{ backgroundColor: colors.backgroundColor }}
     >
-      <div>
-        <h2
-          className="display text-4xl md:text-5xl leading-tight"
-          style={{ color: textColor }}
-        >
-          Dein <br />
-          <span style={{ color: colors.accentColor }}>Unternehmen.</span>
-        </h2>
-      </div>
+      {/* Header */}
+      <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-10">
+        <div>
+          <div
+            className="text-xs uppercase tracking-widest mb-4 opacity-50"
+            style={{ color: textColor }}
+          >
+            Über uns
+          </div>
+          <h2
+            className="display text-4xl md:text-6xl uppercase leading-none"
+            style={{ color: textColor }}
+          >
+            Dein
+            <br />
+            <span style={{ color: colors.accentColor }}>Unternehmen.</span>
+          </h2>
+        </div>
 
-      <div
-        className="text-xl font-light leading-relaxed"
-        style={{ color: getTextColorWithOpacity(colors) }}
-      >
-        <p className="mb-8">
+        <p
+          className="max-w-md font-light leading-relaxed"
+          style={{ color: getTextColorWithOpacity(colors) }}
+        >
           {about.description || "Willkommen bei uns. Wir bieten Ihnen erstklassige Dienstleistungen und Produkte mit höchster Qualität und Professionalität."}
         </p>
+      </div>
 
-        <div
-          className="h-px w-full my-8"
-          style={{ backgroundColor: `${textColor}1A` }}
-        />
+      {/* Additional Content */}
+      {about.items?.[0]?.description && (
+        <p 
+          className="font-light text-lg leading-relaxed opacity-70 mb-8"
+          style={{ color: textColor }}
+        >
+          {about.items[0].description}
+        </p>
+      )}
 
-        <div className="flex gap-12 text-sm uppercase tracking-widest">
-          {contactInfo.telefon && <div>{contactInfo.telefon}</div>}
-          {contactInfo.email && <div>{contactInfo.email}</div>}
-        </div>
+      <div
+        className="h-px w-full my-8"
+        style={{ backgroundColor: `${textColor}1A` }}
+      />
+
+      <div 
+        className="flex gap-12 text-sm uppercase tracking-widest"
+        style={{ color: getTextColorWithOpacity(colors) }}
+      >
+        {contactInfo.telefon && <div>{contactInfo.telefon}</div>}
+        {contactInfo.email && <div>{contactInfo.email}</div>}
       </div>
     </section>
   );

@@ -64,5 +64,5 @@ export default async function TeamPage() {
     return <Template2Team companyId={companyId} data={data} />;
   }
 
-  return <Template1Team companyId={companyId} data={data} />;
+  return <Template2Team companyId={companyId} data={data} />;
 }

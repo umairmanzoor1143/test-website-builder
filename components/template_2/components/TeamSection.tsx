@@ -1,3 +1,4 @@
+"use client";
 import { Team, Employee, ThemeColors } from "@/app/types";
 import Image from "next/image";
 import { getTextColor, getTextColorWithOpacity, combineTeamMembers, getInitials } from "../utils/theme";
@@ -16,7 +17,7 @@ export default function TeamSection({ teams, employees, colors }: TeamSectionPro
 
   return (
     <section
-      className="py-24 px-6 md:px-20 max-w-[1800px] mx-auto"
+      className="py-12 px-6 md:px-20 max-w-[1800px] mx-auto"
       style={{ backgroundColor: colors.backgroundColor }}
     >
       {/* Header */}
@@ -49,7 +50,8 @@ export default function TeamSection({ teams, employees, colors }: TeamSectionPro
       {/* Team Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {teamMembers.slice(0, 6).map((member, index) => (
-          <div key={`team-member-${member.id || index}`} className="team-member group relative cursor-pointer">
+          <div key={`team-member-${member.id || index}`} className="team-member group relative cursor-pointer"  
+          onClick={()=> window.open( `https://id.me-business.ch/card/${member?.id}`, "_blank")}>
             <div className="overflow-hidden aspect-[3/4] mb-5 bg-gray-200">
               {member.image ? (
                 <Image

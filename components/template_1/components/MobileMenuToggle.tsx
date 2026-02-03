@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 interface MobileMenuToggleProps {
@@ -18,6 +19,17 @@ export default function MobileMenuToggle({
   companyId,
 }: MobileMenuToggleProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const hasCompanyId = !!companyId && pathname.startsWith(`/${companyId}`);
+  const basePath = hasCompanyId ? `/${companyId}` : "";
+
+  const navItems = [
+    { label: "Startseite", href: `${basePath || "/"}` },
+    { label: "Über uns", href: `${basePath}/about` },
+    { label: "Team", href: `${basePath}/team` },
+    { label: "Kontakt", href: `${basePath}/contact` },
+  ];
 
   return (
     <>
@@ -75,38 +87,17 @@ export default function MobileMenuToggle({
           }}
         >
           <div className="flex flex-col space-y-4">
-            <Link
-              href={`/${companyId}`}
-              className="text-sm tracking-widest uppercase transition-colors duration-300 opacity-70 hover:opacity-100"
-              style={{ color: textColor }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Startseite
-            </Link>
-            <Link
-              href={`/${companyId}/about`}
-              className="text-sm tracking-widest uppercase transition-colors duration-300 opacity-70 hover:opacity-100"
-              style={{ color: textColor }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Über uns
-            </Link>
-            <Link
-              href={`/${companyId}/team`}
-              className="text-sm tracking-widest uppercase transition-colors duration-300 opacity-70 hover:opacity-100"
-              style={{ color: textColor }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Team
-            </Link>
-            <Link
-              href={`/${companyId}/contact`}
-              className="text-sm tracking-widest uppercase transition-colors duration-300 opacity-70 hover:opacity-100"
-              style={{ color: textColor }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Kontakt
-            </Link>
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm tracking-widest uppercase transition-colors duration-300 opacity-70 hover:opacity-100"
+                style={{ color: textColor }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
       )}

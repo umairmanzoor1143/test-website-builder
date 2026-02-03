@@ -15,7 +15,14 @@ interface HeaderProps {
 
 export default function Header({ company, colors, companyId }: HeaderProps) {
   const pathname = usePathname();
-  
+  const hasCompanyId = pathname.startsWith(`/${companyId}`);
+  const basePath = hasCompanyId ? `/${companyId}` : "";
+
+  const navItems = [
+    { label: "Über uns", href: `${basePath}/about` },
+    { label: "Team", href: `${basePath}/team` },
+    { label: "Kontakt", href: `${basePath}/contact` },
+  ];
   // Get text colors based on theme
   const textColor =
     colors.textColor || getContrastColor(colors.backgroundColor);
@@ -47,7 +54,7 @@ export default function Header({ company, colors, companyId }: HeaderProps) {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
         {/* Logo */}
-        <Link href={`/`} className="group relative z-50 flex items-center gap-3">
+        <Link href={`${basePath || "/"}`} className="group relative z-50 flex items-center gap-3">
           {company.image ? (
             <div className="relative w-10 h-10 rounded-lg overflow-hidden">
               <Image
@@ -76,36 +83,19 @@ export default function Header({ company, colors, companyId }: HeaderProps) {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-10">
-          <Link
-            href={`/about`}
-            className="text-sm tracking-wide transition-colors duration-300"
-            style={{ 
-              color: isActive(`/about`) ? colors.accentColor : textColor,
-              opacity: isActive(`/about`) ? 1 : 0.7,
-            }}
-          >
-            Über uns
-          </Link>
-          <Link
-            href={`/team`}
-            className="text-sm tracking-wide transition-colors duration-300"
-            style={{ 
-              color: isActive(`/team`) ? colors.accentColor : textColor,
-              opacity: isActive(`/team`) ? 1 : 0.7,
-            }}
-          >
-            Team
-          </Link>
-          <Link
-            href={`/contact`}
-            className="text-sm tracking-wide transition-colors duration-300"
-            style={{ 
-              color: isActive(`/contact`) ? colors.accentColor : textColor,
-              opacity: isActive(`/contact`) ? 1 : 0.7,
-            }}
-          >
-            Kontakt
-          </Link>
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm tracking-wide transition-colors duration-300"
+              style={{
+                color: isActive(item.href) ? colors.accentColor : textColor,
+                opacity: isActive(item.href) ? 1 : 0.7,
+              }}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
 
         {/* Mobile Menu Toggle (Client Component) */}

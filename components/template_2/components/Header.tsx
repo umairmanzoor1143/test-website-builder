@@ -17,21 +17,27 @@ export default function Header({ companyName, colors, companyId }: HeaderProps) 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const textColor = getTextColor(colors);
 
+  // ✅ Detect if current route is company-scoped
+  const hasCompanyId = !!companyId && pathname.startsWith(`/template_2/${companyId}`);
+  const basePath = hasCompanyId ? `/template_2/${companyId}` : "";
+
+  // ✅ Use basePath for nav items
   const navItems = [
-    { label: "Über uns", href: `/about` },
-    { label: "Team", href: `/team` },
-    { label: "Kontakt", href: `/contact` },
+    { label: "Über uns", href: `${basePath}/about` },
+    { label: "Team", href: `${basePath}/team` },
+    { label: "Kontakt", href: `${basePath}/contact` },
   ];
+
+  // ✅ Logo should go to company home if company route, else root
+  const homeHref = basePath || "/";
 
   const isActive = (href: string) => pathname === href;
 
   return (
     <>
-      <nav
-        className="fixed top-0 w-full px-6 md:px-8 py-6 flex justify-between items-center z-50 mix-blend-difference text-white"
-      >
+      <nav className="fixed top-0 w-full px-6 md:px-8 py-6 flex justify-between items-center z-50 mix-blend-difference text-white">
         <Link
-          href={`/`}
+          href={homeHref}
           className="display text-lg md:text-xl tracking-tighter font-semibold hover:opacity-80 transition-opacity"
         >
           {companyName.toUpperCase()}
@@ -68,7 +74,9 @@ export default function Header({ companyName, colors, companyId }: HeaderProps) 
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
               className="display text-2xl uppercase tracking-widest transition-colors hover:opacity-70"
-              style={{ color: isActive(item.href) ? colors.accentColor : textColor }}
+              style={{
+                color: isActive(item.href) ? colors.accentColor : textColor,
+              }}
             >
               {item.label}
             </Link>

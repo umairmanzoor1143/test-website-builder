@@ -13,11 +13,11 @@ export default function HeroSection({ company, colors, intro }: HeroSectionProps
   const welcomeText = intro.welcomeTextEN || intro.welcomeTextDE || "";
 
   // Check if we have a hero image
-  const hasHeroImage =
-    intro.imageDesktopMimeType ||
-    intro.imageDesktopPreviewMimeType ||
-    intro.imageMobileMimeType ||
-    intro.imageMobilePreviewMimeType 
+   const hasHeroImage =
+  intro.imageDesktop || 
+  intro.imageDesktopPreview ||
+    intro.imageDesktopPreview ||
+    intro.imageMobilePreview;
 
   // Get text color based on background
   const textColor = colors.textColor || getContrastColor(colors.backgroundColor);
@@ -29,12 +29,12 @@ export default function HeroSection({ company, colors, intro }: HeroSectionProps
       style={{ backgroundColor: colors.backgroundColor }}
     >
       {/* Background - Image or Gradient */}
-      {hasHeroImage && company.image ? (
+      {hasHeroImage ? (
         <>
           <div
             className="absolute inset-0 z-0 bg-fixed bg-center bg-cover bg-no-repeat opacity-60 scale-105"
             style={{
-              backgroundImage: `url('${company.image}')`,
+              backgroundImage: `url('${hasHeroImage}')`,
             }}
           />
           {/* Gradient Overlay for image */}

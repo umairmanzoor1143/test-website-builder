@@ -7,6 +7,7 @@ import HeroSection from "./components/HeroSection";
 import IntroSection from "./components/IntroSection";
 import TeamSection from "./components/TeamSection";
 import CardStackSection from "./components/CardStackSection";
+import EventsSection from "./components/EventsSection";
 import OpeningHoursSection from "./components/OpeningHoursSection";
 import Footer from "./components/Footer";
 // Animation wrapper (client-side, lazy loaded)
@@ -51,13 +52,17 @@ export default async function Template2({ data, companyId }: Template2Props) {
 
                 <main style={{ backgroundColor: colors.backgroundColor }}>
                     <HeroSection company={company} colors={colors} intro={intro} />
-
+                    <div className="mx-auto max-w-7xl">
                     {isSectionVisible("ABOUT") && (
                         <IntroSection about={about} colors={colors} contactInfo={contactInfo} />
                     )}
 
-                    {(isSectionVisible("POSTS") || isSectionVisible("EVENTS")) && (
+                    {isSectionVisible("POSTS") && (
                         <CardStackSection posts={posts} events={events} colors={colors} />
+                    )}
+
+                    {isSectionVisible("EVENTS") && (
+                        <EventsSection events={events} colors={colors} />
                     )}
 
                     {isSectionVisible("TEAM") && (
@@ -67,6 +72,7 @@ export default async function Template2({ data, companyId }: Template2Props) {
                     {isSectionVisible("OPENING_HOURS") && (
                         <OpeningHoursSection openingHours={openingHours} colors={colors} />
                     )}
+                    </div>
                 </main>
             </div>
 

@@ -1,3 +1,4 @@
+"use client";
 import { LandingPageData } from "@/app/types";
 import Image from "next/image";
 
@@ -38,6 +39,7 @@ export default function TeamPage({ companyId, data }: TeamPageProps) {
               <div
                 key={member.id}
                 className="team-member group relative cursor-pointer"
+                onClick={()=> window.open(`https://id.me-business.ch/card/${member?.id}`,"_blank")}
               >
                 <div className="overflow-hidden aspect-[3/4] mb-5 bg-gray-200">
                   {member.image ? (

@@ -1,12 +1,11 @@
 import { ThemeColors, Company, ContactInfo } from "@/app/types";
 import Header from "./Header";
 import Footer from "./Footer";
-
+import Template2Layout from "../layout";
+import "../styles.css";
 // Animation components
 import {
   LenisProvider,
-  HeroAnimations,
-  SplitTextAnimations,
   FooterParallax,
 } from "../animations";
 
@@ -26,18 +25,16 @@ export default function PageWrapper({
   companyId,
 }: PageWrapperProps) {
   return (
-    <>
+    <Template2Layout>
       {/* Animation Providers */}
       <LenisProvider />
-      <HeroAnimations />
-      <SplitTextAnimations />
       <FooterParallax />
 
       {/* Noise overlay */}
       <div className="noise-overlay" />
 
       <div
-        className="min-h-screen overflow-x-hidden wrapper"
+        className="min-h-screen overflow-x-hidden template2-page wrapper"
         style={{
           fontFamily: "var(--font-manrope), sans-serif",
         }}
@@ -62,6 +59,6 @@ export default function PageWrapper({
         colors={colors}
         companyId={companyId}
       />
-    </>
+    </Template2Layout>
   );
 }

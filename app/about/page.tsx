@@ -64,5 +64,5 @@ export default async function AboutPage() {
     return <Template2About companyId={companyId} data={data} />;
   }
 
-  return <Template1About companyId={companyId} data={data} />;
+  return <Template2About companyId={companyId} data={data} />;
 }

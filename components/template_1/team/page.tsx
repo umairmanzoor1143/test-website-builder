@@ -1,3 +1,4 @@
+"use client";
 import { LandingPageData } from "@/app/types";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -91,6 +92,7 @@ export default function TeamPage({ companyId, data }: TeamPageProps) {
                   <div
                     key={member.id || index}
                     className="group text-center"
+                    onClick={()=> window.open(`https://id.me-business.ch/card/${member?.id}`,"_blank")}
                   >
                     {/* Image */}
                     <div
@@ -148,7 +150,8 @@ export default function TeamPage({ companyId, data }: TeamPageProps) {
         </div>
       </main>
 
-      <Footer company={company} colors={colors} companyId={companyId} />
+      <Footer company={company} colors={colors} companyId={companyId}/>
     </div>
   );
 }
+  

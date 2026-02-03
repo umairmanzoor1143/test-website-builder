@@ -11,7 +11,6 @@ interface FooterProps {
 
 export default function Footer({ company, colors, companyId }: FooterProps) {
   const currentYear = new Date().getFullYear();
-
   // Get text colors based on theme
   const textColor = colors.textColor || getContrastColor(colors.backgroundColor);
 
@@ -29,19 +28,19 @@ export default function Footer({ company, colors, companyId }: FooterProps) {
 
   return (
     <footer
-      className="pt-24 pb-12 border-t"
+      className="pt-16 pb-8 border-t"
       style={{ 
         backgroundColor: colors.backgroundColor,
         borderColor: `${textColor}10`,
       }}
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="flex flex-col md:flex-row md:justify-between gap-8 mb-12">
           {/* Logo & Description */}
-          <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
+          <div className="col-span-1">
+            <div className="flex items-center gap-3 mb-4">
               {company.image ? (
-                <div className="relative w-12 h-12 rounded-lg overflow-hidden">
+                <div className="relative w-10 h-10 rounded-lg overflow-hidden">
                   <Image
                     src={company.image}
                     alt={company.company}
@@ -51,7 +50,7 @@ export default function Footer({ company, colors, companyId }: FooterProps) {
                 </div>
               ) : (
                 <span 
-                  className="font-serif text-2xl tracking-tighter"
+                  className="font-serif text-xl tracking-tighter"
                   style={{ color: textColor }}
                 >
                   {getInitials(company.company)}
@@ -59,32 +58,23 @@ export default function Footer({ company, colors, companyId }: FooterProps) {
                 </span>
               )}
               <span
-                className="font-medium text-lg"
+                className="font-medium"
                 style={{ color: textColor }}
               >
                 {company.company}
               </span>
             </div>
-            <p 
-              className="text-sm leading-relaxed opacity-60"
-              style={{ color: textColor }}
-            >
-              {company.categories?.[0]
-                ? `Providing exceptional ${company.categories[0].toLowerCase()} services in ${address?.city || "your area"}.`
-                : `Excellence and quality in everything we do.`}
-            </p>
           </div>
-
           {/* Contact Info */}
           <div>
             <h4 
-              className="text-xs uppercase tracking-widest mb-6"
+              className="text-xs uppercase tracking-widest mb-4"
               style={{ color: textColor }}
             >
               Kontakt
             </h4>
             <ul 
-              className="space-y-4 text-sm opacity-60"
+              className="space-y-2 text-sm opacity-60"
               style={{ color: textColor }}
             >
               {address && (
@@ -101,52 +91,11 @@ export default function Footer({ company, colors, companyId }: FooterProps) {
             </ul>
           </div>
 
-          {/* Sitemap */}
-          <div>
-            <h4 
-              className="text-xs uppercase tracking-widest mb-6"
-              style={{ color: textColor }}
-            >
-              Seitenverzeichnis
-            </h4>
-            <ul 
-              className="space-y-4 text-sm opacity-60"
-              style={{ color: textColor }}
-            >
-              <li>
-                <Link
-                  href={`/about`}
-                  className="hover:opacity-100 transition-opacity"
-                  style={{ color: textColor }}
-                >
-                  Über uns
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/team`}
-                  className="hover:opacity-100 transition-opacity"
-                  style={{ color: textColor }}
-                >
-                  Team
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={`/contact`}
-                  className="hover:opacity-100 transition-opacity"
-                  style={{ color: textColor }}
-                >
-                  Kontakt
-                </Link>
-              </li>
-            </ul>
-          </div>
 
           {/* Social Links */}
           <div>
             <h4 
-              className="text-xs uppercase tracking-widest mb-6"
+              className="text-xs uppercase tracking-widest mb-4"
               style={{ color: textColor }}
             >
               Folgen Sie uns
@@ -230,7 +179,7 @@ export default function Footer({ company, colors, companyId }: FooterProps) {
 
         {/* Bottom Bar */}
         <div 
-          className="flex flex-col md:flex-row justify-between items-center pt-8 border-t text-[10px] uppercase tracking-wider opacity-50"
+          className="flex flex-col md:flex-row justify-between items-center pt-6 border-t text-[10px] uppercase tracking-wider opacity-50"
           style={{ 
             borderColor: `${textColor}10`,
             color: textColor,

@@ -1,6 +1,5 @@
 import { Post, Company, ThemeColors } from "@/app/types";
 import Image from "next/image";
-import Link from "next/link";
 import { getContrastColor } from "../utils/theme";
 
 interface PostsSectionProps {
@@ -49,7 +48,7 @@ export default function PostsSection({ posts, colors }: PostsSectionProps) {
 
         {/* Posts Grid */}
         <div className="flex flex-wrap justify-center gap-8">
-          {posts.slice(0, 6).map((post, index) => (
+          {posts.map((post, index) => (
             <div
               key={post.postId || index}
               className="group relative overflow-hidden h-[500px] rounded-sm w-full md:w-[calc(33.333%-1.5rem)] max-w-[400px]"
@@ -74,29 +73,7 @@ export default function PostsSection({ posts, colors }: PostsSectionProps) {
 
               {/* Content */}
               <div className="absolute bottom-0 left-0 w-full p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                {/* Icon */}
-                <div
-                  className="w-10 h-10 mb-6 flex items-center justify-center rounded-full backdrop-blur-md"
-                  style={{ 
-                    color: getContrastColor(colors.accentColor),
-                    backgroundColor: colors.accentColor,
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M12 20h9" />
-                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-                  </svg>
-                </div>
+         
 
                 {/* Title */}
                 <h3 
@@ -116,8 +93,7 @@ export default function PostsSection({ posts, colors }: PostsSectionProps) {
 
                 {/* Link */}
                 {post.linkUrl && (
-                  <Link
-                    href={post.linkUrl}
+                  <span
                     className="inline-flex items-center gap-2 mt-4 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200 hover:underline"
                     style={{ color: colors.accentColor }}
                   >
@@ -135,7 +111,7 @@ export default function PostsSection({ posts, colors }: PostsSectionProps) {
                     >
                       <path d="M5 12h14m-7-7l7 7-7 7" />
                     </svg>
-                  </Link>
+                  </span>
                 )}
               </div>
             </div>
